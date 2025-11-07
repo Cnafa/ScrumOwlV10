@@ -1,0 +1,5 @@
+{
+  "name": "ScrumOwl V10",
+  "description": "A sophisticated work item editor based on a detailed technical specification. It allows users to create and manage tasks with features like labels, checklists, attachments, and an AI-powered summary generator using the Gemini API.",
+  "requestFramePermissions": []
+}

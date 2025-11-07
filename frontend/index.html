@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>ScrumOwl</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Hack:wght@400;700&family=Vazirmatn:wght@400;700&display=swap" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com?plugins=typography"></script>
+    <script>
+      tailwind.config = {
+        theme: {
+          extend: {
+            fontFamily: {
+              sans: ['Hack', 'monospace'],
+              vazir: ['Vazirmatn', 'sans-serif'],
+            },
+            colors: {
+              primary: '#486966',
+              primarySoft: '#eef2f2',
+              'label-neutral-bg': '#E5E7EB',
+              'label-neutral-text': '#1F2937',
+              'label-blue-bg': '#DBEAFE',
+              'label-blue-text': '#1E40AF',
+              'label-amber-bg': '#FEF3C7',
+              'label-amber-text': '#92400E',
+              'label-red-bg': '#FEE2E2',
+              'label-red-text': '#991B1B',
+              'due-far': 'rgba(16, 185, 129, 0.15)',
+              'due-far-text': '#065f46',
+              'due-midfar': 'rgba(52, 211, 153, 0.2)',
+              'due-midfar-text': '#047857',
+              'due-approaching': 'rgba(245, 158, 11, 0.2)',
+              'due-approaching-text': '#92400E',
+              'due-near': 'rgba(251, 146, 60, 0.25)',
+              'due-near-text': '#B45309',
+              'due-today': '#F97316',
+              'due-overdue': '#DC2626',
+              'due-overdue-strong': '#B91C1C',
+            },
+            animation: {
+              'fade-in-out': 'fadeInOut 3s ease-in-out forwards',
+              'pulse-once': 'pulse-once 1.5s cubic-bezier(0.4, 0, 0.6, 1)',
+              'highlight-pulse': 'highlightPulse 2.5s ease-out forwards',
+            },
+            keyframes: {
+              fadeInOut: {
+                '0%, 100%': { opacity: 0, transform: 'translateY(10px)' },
+                '10%, 90%': { opacity: 1, transform: 'translateY(0)' },
+              },
+              'pulse-once': {
+                '0%, 100%': { opacity: 1 },
+                '50%': { opacity: .7 },
+              },
+              highlightPulse: {
+                '0%': { outline: '2px solid rgba(72, 105, 102, 0.7)', outlineOffset: '2px' },
+                '70%': { outline: '2px solid rgba(72, 105, 102, 0.2)', outlineOffset: '2px' },
+                '100%': { outline: '2px solid rgba(72, 105, 102, 0)', outlineOffset: '2px' },
+              }
+            }
+          },
+        },
+      }
+    </script>
+    <style>
+      /* Base font size and color */
+      body {
+        font-size: 14px;
+        color: #1e293b; /* slate-800 */
+      }
+      /* Custom scrollbar updated to new palette */
+      ::-webkit-scrollbar {
+        width: 8px;
+        height: 8px;
+      }
+      ::-webkit-scrollbar-track {
+        background: #E5E7EB;
+      }
+      ::-webkit-scrollbar-thumb {
+        background: #CBD5E1;
+        border-radius: 10px;
+      }
+      ::-webkit-scrollbar-thumb:hover {
+        background: #9CA3AF;
+      }
+      /* FE-UI-08: Readable Checkboxes */
+      input[type="checkbox"] {
+        -webkit-appearance: none;
+        appearance: none;
+        background-color: #FFFFFF;
+        border: 1px solid #CBD5E1;
+        width: 1rem;
+        height: 1rem;
+        border-radius: 4px;
+        position: relative;
+        cursor: pointer;
+        transition: all 150ms;
+      }
+      input[type="checkbox"]:checked {
+        background-color: #486966;
+        border-color: #486966;
+      }
+      input[type="checkbox"]:checked::before {
+        content: '';
+        position: absolute;
+        left: 5px;
+        top: 2px;
+        width: 4px;
+        height: 8px;
+        border: solid #FFFFFF;
+        border-width: 0 2px 2px 0;
+        transform: rotate(45deg);
+      }
+      input[type="checkbox"]:focus-visible {
+        outline: 2px solid #b2bebf;
+        outline-offset: 2px;
+      }
+      input[type="checkbox"]:hover {
+        border-color: #94a3b8;
+      }
+
+      /* --- NEW STYLES for Rich Text Editor Tables & Images --- */
+      .prose .ProseMirror table {
+        width: 100%;
+        border-collapse: collapse;
+        margin: 1rem 0;
+        table-layout: fixed;
+        overflow: hidden; /* for rounded corners */
+      }
+      .prose .ProseMirror th, .prose .ProseMirror td {
+        border: 1px solid #CBD5E1;
+        padding: 0.5rem 0.75rem;
+        vertical-align: top;
+        position: relative;
+        min-width: 3em;
+      }
+      .prose .ProseMirror th {
+        font-weight: bold;
+        background-color: #F1F5F9;
+        text-align: start !important; /* Force alignment for RTL/LTR */
+      }
+      .prose .ProseMirror .selectedCell:after {
+        content: "";
+        position: absolute;
+        inset: 0;
+        background: rgba(72, 105, 102, 0.15);
+        pointer-events: none;
+        z-index: 2;
+      }
+      .prose .ProseMirror .column-resize-handle {
+        position: absolute;
+        right: -2px;
+        top: 0;
+        bottom: 0;
+        width: 4px;
+        cursor: col-resize;
+        background-color: #b2bebf;
+      }
+      .prose .ProseMirror img {
+        max-width: 100%;
+        height: auto;
+        border-radius: 4px;
+      }
+      .prose .ProseMirror img.ProseMirror-selectednode {
+        outline: 3px solid #486966;
+      }
+      /* --- END NEW STYLES --- */
+    </style>
+  <script type="importmap">
+{
+  "imports": {
+    "react": "https://aistudiocdn.com/react@^19.2.0",
+    "react-dom/": "https://aistudiocdn.com/react-dom@^19.2.0/",
+    "react/": "https://aistudiocdn.com/react@^19.2.0/",
+    "@google/genai": "https://aistudiocdn.com/@google/genai@^1.27.0",
+    "lodash-es": "https://aistudiocdn.com/lodash-es@^4.17.21",
+    "@tiptap/extension-code-block": "https://aistudiocdn.com/@tiptap/extension-code-block@^3.9.1",
+    "@tiptap/extension-color": "https://aistudiocdn.com/@tiptap/extension-color@^3.9.1",
+    "@tiptap/extension-link": "https://aistudiocdn.com/@tiptap/extension-link@^3.9.1",
+    "@tiptap/starter-kit": "https://aistudiocdn.com/@tiptap/starter-kit@^3.9.1",
+    "@tiptap/extension-highlight": "https://aistudiocdn.com/@tiptap/extension-highlight@^3.9.1",
+    "tippy.js": "https://aistudiocdn.com/tippy.js@^6.3.7",
+    "@tiptap/extension-text-style": "https://aistudiocdn.com/@tiptap/extension-text-style@^3.9.1",
+    "@tiptap/react": "https://aistudiocdn.com/@tiptap/react@^3.9.1",
+    "@tiptap/extension-character-count": "https://aistudiocdn.com/@tiptap/extension-character-count@^3.9.1",
+    "@tiptap/suggestion": "https://aistudiocdn.com/@tiptap/suggestion@^3.9.1",
+    "react-dom": "https://aistudiocdn.com/react-dom@^19.2.0",
+    "@tiptap/extension-table": "https://aistudiocdn.com/@tiptap/extension-table@^3.9.1",
+    "@tiptap/extension-table-cell": "https://aistudiocdn.com/@tiptap/extension-table-cell@^3.9.1",
+    "@tiptap/extension-table-header": "https://aistudiocdn.com/@tiptap/extension-table-header@^3.9.1",
+    "@tiptap/extension-table-row": "https://aistudiocdn.com/@tiptap/extension-table-row@^3.9.1",
+    "@tiptap/extension-image": "https://aistudiocdn.com/@tiptap/extension-image@^3.9.1",
+    "@tiptap/extension-text-align": "https://aistudiocdn.com/@tiptap/extension-text-align@^3.9.1",
+    "@tiptap/extension-heading": "https://aistudiocdn.com/@tiptap/extension-heading@^3.9.1",
+    "vite": "https://aistudiocdn.com/vite@^7.1.12",
+    "@vitejs/plugin-react": "https://aistudiocdn.com/@vitejs/plugin-react@^5.1.0"
+  }
+}
+</script>
+</head>
+  <body>
+    <div id="root"></div>
+    <script type="module" src="/src/index.tsx"></script>
+  </body>
+</html>

@@ -1,0 +1,41 @@
+{
+  "name": "scrumowl-app",
+  "private": true,
+  "version": "0.1.0",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "tsc && vite build",
+    "preview": "vite preview"
+  },
+  "dependencies": {
+    "react": "^19.2.0",
+    "react-dom": "^19.2.0",
+    "@google/genai": "^1.27.0",
+    "lodash-es": "^4.17.21",
+    "@tiptap/react": "^3.9.1",
+    "@tiptap/starter-kit": "^3.9.1",
+    "@tiptap/extension-link": "^3.9.1",
+    "@tiptap/extension-highlight": "^3.9.1",
+    "@tiptap/extension-color": "^3.9.1",
+    "@tiptap/extension-text-style": "^3.9.1",
+    "@tiptap/extension-character-count": "^3.9.1",
+    "@tiptap/suggestion": "^3.9.1",
+    "tippy.js": "^6.3.7",
+    "@tiptap/extension-code-block": "^3.9.1",
+    "@tiptap/extension-table": "^3.9.1",
+    "@tiptap/extension-table-cell": "^3.9.1",
+    "@tiptap/extension-table-header": "^3.9.1",
+    "@tiptap/extension-table-row": "^3.9.1",
+    "@tiptap/extension-image": "^3.9.1",
+    "@tiptap/extension-text-align": "^3.9.1",
+    "@tiptap/extension-heading": "^3.9.1"
+  },
+  "devDependencies": {
+    "@types/react": "^18.3.3",
+    "@types/react-dom": "^18.3.0",
+    "@vitejs/plugin-react": "^4.3.1",
+    "typescript": "^5.5.3",
+    "vite": "^5.3.3"
+  }
+}
